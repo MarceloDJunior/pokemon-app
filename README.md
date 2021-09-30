@@ -1,6 +1,6 @@
 # pokemon_app
 
-A simple Flutter project that lists all the 151 1st genereation pokemóns.
+A simple Flutter project that lists all the 151 1st generation pokemóns.
 
 This project was created for study purposes.
 

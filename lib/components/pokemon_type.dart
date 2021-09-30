@@ -1,48 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:pokemon_app/model/type_enum.dart';
+import 'package:pokemon_app/utils/constants.dart';
 
-final Map<String, int> colors = {
-  TypeEnum.normal.name: 0xFFA7A877,
-  TypeEnum.fire.name: 0xFFEF8130,
-  TypeEnum.fighting.name: 0xFFC03028,
-  TypeEnum.water.name: 0xFF6790EF,
-  TypeEnum.flying.name: 0xFFA791F0,
-  TypeEnum.grass.name: 0xFF78C850,
-  TypeEnum.poison.name: 0xFFA0409F,
-  TypeEnum.electric.name: 0xFFF8CF31,
-  TypeEnum.ground.name: 0xFFE1BF68,
-  TypeEnum.psychic.name: 0xFFF85887,
-  TypeEnum.rock.name: 0xFFB89F39,
-  TypeEnum.ice.name: 0xFF99D7D8,
-  TypeEnum.bug.name: 0xFFA9B721,
-  TypeEnum.dragon.name: 0xFF7138F8,
-  TypeEnum.ghost.name: 0xFF705898,
-  TypeEnum.dark.name: 0xFF705848,
-  TypeEnum.steel.name: 0xFFB8B7D0,
-  TypeEnum.fairy.name: 0xFFEE99AC,
-};
+enum TypeSize { small, medium }
 
 class PokemonType extends StatelessWidget {
-  const PokemonType({Key? key, required this.type}) : super(key: key);
+  const PokemonType({Key? key, required this.type, this.size = TypeSize.medium})
+      : super(key: key);
 
   final String type;
+  final TypeSize size;
 
   @override
   Widget build(BuildContext context) {
-    return FilterChip(
-      backgroundColor: Color(colors[type] ?? 0xFFA7A877),
-      label: Container(
-        width: 46,
-        child: Text(
-          type,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 12.0,
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: size == TypeSize.small ? 3 : 5),
+      child: FilterChip(
+        backgroundColor: Color(typesColors[type] ?? 0xFFA7A877),
+        visualDensity: size == TypeSize.small
+            ? VisualDensity(horizontal: 0.0, vertical: -4)
+            : null,
+        labelPadding: size == TypeSize.small
+            ? EdgeInsets.symmetric(horizontal: 4, vertical: -2)
+            : null,
+        padding: size == TypeSize.small
+            ? EdgeInsets.symmetric(vertical: 0, horizontal: 4)
+            : null,
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        label: Container(
+          width: size == TypeSize.medium ? 46 : 32,
+          child: Text(
+            type,
+            style: TextStyle(
+              color: type == TypeEnum.electric.name || type == TypeEnum.ice.name
+                  ? Colors.black
+                  : Theme.of(context).textTheme.bodyText2?.color,
+              fontSize: size == TypeSize.medium ? 12.0 : 8.0,
+            ),
           ),
+          alignment: Alignment.center,
         ),
-        alignment: Alignment.center,
+        onSelected: (_) {},
       ),
-      onSelected: (b) {},
     );
   }
 }
