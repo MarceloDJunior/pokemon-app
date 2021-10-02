@@ -57,7 +57,8 @@ class _PokemonDetail extends State<PokemonDetail> {
   @override
   Widget build(BuildContext context) {
     late Color backgroundColor;
-    final ThemeController themeController = Provider.of<ThemeController>(context);
+    final ThemeController themeController =
+        Provider.of<ThemeController>(context);
 
     if (themeController.isDarkMode()) {
       backgroundColor = Theme.of(context).primaryColor;
@@ -113,7 +114,8 @@ class _PokemonDetail extends State<PokemonDetail> {
                                   SizedBox(
                                     height: 110.0,
                                   ),
-                                  Text("${widget.pokemon.name} #${widget.pokemon.num}",
+                                  Text(
+                                      "${widget.pokemon.name} #${widget.pokemon.num}",
                                       style: Theme.of(context)
                                           .textTheme
                                           .headline2),
@@ -257,6 +259,17 @@ class _PokemonDetail extends State<PokemonDetail> {
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: imageProvider,
+                    ),
+                  ),
+                ),
+                placeholder: (context, url) => Container(
+                  height: imageSize,
+                  width: imageSize,
+                  child: Center(
+                    heightFactor: 1.8,
+                    widthFactor: 1.8,
+                    child: CircularProgressIndicator(
+                      color: Theme.of(context).indicatorColor,
                     ),
                   ),
                 ),

@@ -99,6 +99,7 @@ class PokemonItem extends StatelessWidget {
                               padding: EdgeInsets.all(32.0),
                               child: CircularProgressIndicator(
                                 color: Theme.of(context).indicatorColor,
+                                strokeWidth: 2.4,
                               ),
                             ),
                           ),
