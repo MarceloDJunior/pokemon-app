@@ -20,7 +20,7 @@ class PokemonList extends StatelessWidget {
     }
 
     return GridView.count(
-      padding: EdgeInsets.only(top: 12, left: 12, right: 12),
+      padding: EdgeInsets.all(12),
       crossAxisCount: crossAxisCount,
       children:
           pokemonList.map((pokemon) => PokemonItem(pokemon: pokemon)).toList(),
