@@ -70,8 +70,10 @@ class _HomeState extends State<Home> {
                       onQueryChange: (String text) {
                         pokemonController.setFilterText(text);
                       }),
-                  floating: false,
+                  floating: true,
                   pinned: false,
+                  snap: true,
+                  elevation: 0,
                 ),
               ),
             ];
@@ -85,7 +87,7 @@ class _HomeState extends State<Home> {
           onPressed: () {
             reloadPokemons();
           },
-          child: Icon(Icons.refresh, color: Theme.of(context).buttonColor),
+          child: Icon(Icons.refresh, color: Theme.of(context).colorScheme.onPrimary),
         ),
       ),
     );
