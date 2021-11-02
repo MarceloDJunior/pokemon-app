@@ -6,6 +6,10 @@ class Themes {
     return ThemeData(
       primaryColor: Colors.blue,
       backgroundColor: Colors.grey.shade100,
+      colorScheme: ColorScheme.light(
+        primary: Colors.blue,
+        onPrimary: Colors.white,
+      ),
       textTheme: const TextTheme(
         headline1: TextStyle(
             fontSize: 22.0, fontWeight: FontWeight.bold, color: Colors.white),
@@ -21,15 +25,12 @@ class Themes {
         subtitle2: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
       ),
       iconTheme: IconThemeData(color: Colors.blue),
-      buttonColor: Colors.white,
-      accentColor: Colors.white,
       cardColor: Colors.white,
       splashColor: Colors.cyan,
       shadowColor: Colors.grey,
       hintColor: Colors.grey,
       indicatorColor: Colors.red,
       appBarTheme: AppBarTheme(
-        backwardsCompatibility: false,
         systemOverlayStyle: SystemUiOverlayStyle.light,
       ),
     );
@@ -39,6 +40,10 @@ class Themes {
     return ThemeData(
       primaryColor: Color.fromRGBO(20, 21, 24, 1),
       backgroundColor: Color.fromRGBO(20, 21, 24, 1),
+      colorScheme: ColorScheme.light(
+        primary: Color.fromRGBO(20, 21, 24, 1),
+        onPrimary: Colors.white,
+      ),
       textTheme: const TextTheme(
         headline1: TextStyle(
             fontSize: 22.0, fontWeight: FontWeight.bold, color: Colors.white),
@@ -54,14 +59,12 @@ class Themes {
         subtitle2: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
       ),
       iconTheme: IconThemeData(color: Colors.grey.shade400),
-      buttonColor: Colors.white,
       cardColor: Color.fromRGBO(34, 35, 40, 1),
       splashColor: Color.fromRGBO(20, 21, 24, 1),
       shadowColor: Color.fromRGBO(20, 21, 24, 1),
       hintColor: Colors.grey,
       indicatorColor: Colors.red,
       appBarTheme: AppBarTheme(
-        backwardsCompatibility: false,
         systemOverlayStyle: SystemUiOverlayStyle.light,
       ),
     );
