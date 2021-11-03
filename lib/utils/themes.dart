@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Themes {
   static ThemeData get lightTheme {
@@ -9,6 +11,8 @@ class Themes {
       colorScheme: ColorScheme.light(
         primary: Colors.blue,
         onPrimary: Colors.white,
+        onSurface: Colors.blue,
+        primaryVariant: Colors.blue.shade400,
       ),
       textTheme: const TextTheme(
         headline1: TextStyle(
@@ -43,6 +47,8 @@ class Themes {
       colorScheme: ColorScheme.light(
         primary: Color.fromRGBO(20, 21, 24, 1),
         onPrimary: Colors.white,
+        onSurface: Colors.grey.shade400,
+        primaryVariant: Color.fromRGBO(20, 21, 24, 1),
       ),
       textTheme: const TextTheme(
         headline1: TextStyle(
@@ -68,5 +74,19 @@ class Themes {
         systemOverlayStyle: SystemUiOverlayStyle.light,
       ),
     );
+  }
+
+  static isDarkMode() async {
+    // Check if dark mode is enabled in app
+    final prefs = await SharedPreferences.getInstance();
+    bool isDarkModeSettedByUser = prefs.getBool('isDarkMode') != null;
+    bool? isAppDarkMode = prefs.getBool('isDarkMode') == true;
+
+    // Check if device is in dark mode
+    Brightness brightness =
+        SchedulerBinding.instance!.window.platformBrightness;
+    bool isDeviceDarkMode = brightness == Brightness.dark;
+
+    return isDarkModeSettedByUser ? isAppDarkMode : isDeviceDarkMode;
   }
 }

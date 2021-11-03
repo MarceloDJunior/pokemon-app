@@ -1,9 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:pokemon_app/bloc/pokemon/pokemon_bloc.dart';
+import 'package:pokemon_app/bloc/theme/theme_cubit.dart';
 import 'package:pokemon_app/components/pokemon_type.dart';
-import 'package:pokemon_app/controllers/theme_controller.dart';
-import 'package:pokemon_app/controllers/pokemon_controller.dart';
 import 'package:pokemon_app/model/pokemon.dart';
 import 'package:pokemon_app/utils/constants.dart';
 import 'package:provider/provider.dart';
@@ -57,10 +58,9 @@ class _PokemonDetail extends State<PokemonDetail> {
   @override
   Widget build(BuildContext context) {
     late Color backgroundColor;
-    final ThemeController themeController =
-        Provider.of<ThemeController>(context);
+    final ThemeCubit themeCubit = context.read<ThemeCubit>();
 
-    if (themeController.isDarkMode()) {
+    if (themeCubit.isDarkMode()) {
       backgroundColor = Theme.of(context).primaryColor;
     } else {
       backgroundColor =
@@ -316,9 +316,7 @@ class _PokemonDetail extends State<PokemonDetail> {
   }
 
   evolutionItem(BuildContext context, String number) {
-    PokemonController pokemonController =
-        Provider.of<PokemonController>(context, listen: false);
-    Pokemon? pokemon = pokemonController.getPokemonByNumber(number);
+    Pokemon? pokemon = BlocProvider.of<PokemonBloc>(context).getPokemonByNumber(number);
 
     if (pokemon == null) {
       return null;

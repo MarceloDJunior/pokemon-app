@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pokemon_app/bloc/theme/theme_cubit.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_switch/flutter_switch.dart';
-import 'package:pokemon_app/controllers/theme_controller.dart';
 import 'package:pokemon_app/utils/themes.dart';
 
 class AppSearchBar extends StatefulWidget implements PreferredSizeWidget {
@@ -38,7 +38,7 @@ class _AppSearchBarState extends State<AppSearchBar> {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeController themeController = Provider.of<ThemeController>(context);
+    final ThemeCubit themeCubit = context.read<ThemeCubit>();
     return Padding(
       padding: EdgeInsets.only(bottom: 25),
       child: Container(
@@ -73,9 +73,9 @@ class _AppSearchBarState extends State<AppSearchBar> {
                         color: Colors.yellow.shade800,
                       ),
                       inactiveToggleColor: Colors.white,
-                      value: themeController.appTheme == Themes.darkTheme,
+                      value: themeCubit.getTheme() == Themes.darkTheme,
                       onToggle: (bool state) {
-                        themeController.setTheme(
+                        themeCubit.setTheme(
                             state ? Themes.darkTheme : Themes.lightTheme);
                       },
                     ),

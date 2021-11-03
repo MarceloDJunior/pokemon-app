@@ -1,54 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pokemon_app/controllers/theme_controller.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pokemon_app/bloc/pokemon/pokemon_bloc.dart';
+import 'package:pokemon_app/bloc/theme/theme_cubit.dart';
+import 'package:pokemon_app/components/no_results.dart';
 import 'package:provider/provider.dart';
 import 'package:pokemon_app/components/app_search_bar.dart';
-import 'package:pokemon_app/controllers/pokemon_controller.dart';
-import 'package:pokemon_app/model/pokemon.dart';
 import 'package:pokemon_app/screens/home/pokemon_list.dart';
-import 'package:pokemon_app/services/pokemon_service.dart';
 
 class Home extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  final double toolbarHeight = kToolbarHeight + 110;
+  String filterText = '';
 
   @override
   void initState() {
     super.initState();
-    getPokemons();
-  }
-
-  getPokemons() async {
-    final PokemonController pokemonController =
-        Provider.of<PokemonController>(context, listen: false);
-
-    await Future.delayed(Duration(milliseconds: 400));
-
-    List<Pokemon>? pokemonList = await PokemonService.getPokemons();
-    pokemonController.setPokemonList(pokemonList);
-  }
-
-  reloadPokemons() {
-    final PokemonController pokemonController =
-        Provider.of<PokemonController>(context, listen: false);
-    pokemonController.setPokemonList(null);
-
-    getPokemons();
+    BlocProvider.of<PokemonBloc>(context).add(GetPokemons());
   }
 
   @override
   Widget build(BuildContext context) {
-    final ThemeController themeController = Provider.of<ThemeController>(context);
-    final PokemonController pokemonController =
-        Provider.of<PokemonController>(context);
-    List<Pokemon>? pokemonList = pokemonController.filteredList;
+    final double toolbarHeight = kToolbarHeight + 110;
+    final ThemeCubit themeCubit = context.read<ThemeCubit>();
 
     return AnnotatedRegion(
-      value: themeController.isDarkMode()
+      value: themeCubit.isDarkMode()
           ? SystemUiOverlayStyle.light
           : SystemUiOverlayStyle.dark,
       child: Scaffold(
@@ -68,7 +48,8 @@ class _HomeState extends State<Home> {
                   flexibleSpace: AppSearchBar(
                       preferredSize: Size.fromHeight(toolbarHeight),
                       onQueryChange: (String text) {
-                        pokemonController.setFilterText(text);
+                        BlocProvider.of<PokemonBloc>(context)
+                            .add(FilterPokemons(text));
                       }),
                   floating: true,
                   pinned: false,
@@ -78,16 +59,30 @@ class _HomeState extends State<Home> {
               ),
             ];
           },
-          body: pokemonList == null
-              ? Center(child: CircularProgressIndicator())
-              : PokemonList(pokemonList: List.from(pokemonList)),
+          body: BlocBuilder(
+            builder: (context, state) {
+              if (state is PokemonLoaded) {
+                return PokemonList(pokemonList: state.pokemonList);
+              } else if (state is PokemonLoading) {
+                return Center(child: CircularProgressIndicator(color: Theme.of(context).colorScheme.onSurface));
+              } else if (state is PokemonError) {
+                return NoResults(
+                    description: 'No pokémon found matching your search.');
+              } else {
+                return Center(child: CircularProgressIndicator(color: Theme.of(context).colorScheme.onSurface));
+              }
+            },
+            bloc: BlocProvider.of<PokemonBloc>(context),
+          ),
         ),
         floatingActionButton: FloatingActionButton(
           backgroundColor: Theme.of(context).primaryColor,
+          splashColor: Theme.of(context).colorScheme.primaryVariant,
           onPressed: () {
-            reloadPokemons();
+            BlocProvider.of<PokemonBloc>(context).add(GetPokemons());
           },
-          child: Icon(Icons.refresh, color: Theme.of(context).colorScheme.onPrimary),
+          child: Icon(Icons.refresh,
+              color: Theme.of(context).colorScheme.onPrimary),
         ),
       ),
     );
