@@ -16,7 +16,7 @@ class PokemonType extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: size == TypeSize.small ? 3 : 5),
       child: FilterChip(
-        backgroundColor: Color(typesColors[type] ?? 0xFFA7A877),
+        backgroundColor: Color(TYPES_COLORS[type] ?? 0xFFA7A877),
         visualDensity: size == TypeSize.small
             ? VisualDensity(horizontal: 0.0, vertical: -4)
             : null,

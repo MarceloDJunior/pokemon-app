@@ -63,7 +63,7 @@ class _PokemonDetail extends State<PokemonDetail> {
       backgroundColor = Theme.of(context).primaryColor;
     } else {
       backgroundColor =
-          Color(typesColors[widget.pokemon.type.first] ?? 0xFFA7A877);
+          Color(TYPES_COLORS[widget.pokemon.type.first] ?? 0xFFA7A877);
     }
 
     return WillPopScope(

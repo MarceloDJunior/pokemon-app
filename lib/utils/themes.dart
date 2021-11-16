@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:pokemon_app/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Themes {
@@ -79,8 +80,8 @@ class Themes {
   static isDarkMode() async {
     // Check if dark mode is enabled in app
     final prefs = await SharedPreferences.getInstance();
-    bool isDarkModeSettedByUser = prefs.getBool('isDarkMode') != null;
-    bool? isAppDarkMode = prefs.getBool('isDarkMode') == true;
+    bool isDarkModeSettedByUser = prefs.getBool(IS_DARK_MODE) != null;
+    bool? isAppDarkMode = prefs.getBool(IS_DARK_MODE) == true;
 
     // Check if device is in dark mode
     Brightness brightness =

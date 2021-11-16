@@ -1,6 +1,9 @@
 import 'package:pokemon_app/model/type_enum.dart';
 
-final Map<String, int> typesColors = {
+const IS_DARK_MODE = 'isDarkMode';
+
+// ignore: non_constant_identifier_names
+final Map<String, int> TYPES_COLORS = {
   TypeEnum.normal.name: 0xFFA7A877,
   TypeEnum.fire.name: 0xFFFF6D00,
   TypeEnum.fighting.name: 0xFFC03028,

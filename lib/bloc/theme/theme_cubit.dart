@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pokemon_app/bloc/theme/theme_state.dart';
-import 'package:pokemon_app/utils/themes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:pokemon_app/bloc/theme/theme_state.dart';
+import 'package:pokemon_app/utils/constants.dart';
+import 'package:pokemon_app/utils/themes.dart';
 
 class ThemeCubit extends Cubit<ThemeState> {
   ThemeData _appTheme = Themes.lightTheme;
@@ -16,7 +17,7 @@ class ThemeCubit extends Cubit<ThemeState> {
     this._appTheme = theme;
 
     SharedPreferences _prefs = await SharedPreferences.getInstance();
-    _prefs.setBool('isDarkMode', theme == Themes.darkTheme);
+    _prefs.setBool(IS_DARK_MODE, theme == Themes.darkTheme);
 
     emit(ThemeState(appTheme: theme));
   }
