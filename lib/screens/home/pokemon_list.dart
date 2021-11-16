@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pokemon_app/components/no_results.dart';
+import 'package:pokemon_app/widgets/no_results.dart';
 import 'package:pokemon_app/screens/home/pokemon_item.dart';
 import 'package:pokemon_app/model/pokemon.dart';
 

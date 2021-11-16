@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:pokemon_app/components/pokemon_type.dart';
+import 'package:pokemon_app/widgets/pokemon_type.dart';
 import 'package:pokemon_app/model/pokemon.dart';
 import 'package:pokemon_app/screens/home/pokemon_list.dart';
 import 'package:pokemon_app/screens/pokemon_detail/pokemon_detail.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pokemon_app/bloc/theme/theme_cubit.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:pokemon_app/bloc/theme/theme_cubit.dart';
 import 'package:pokemon_app/utils/themes.dart';
 
 class AppSearchBar extends StatefulWidget implements PreferredSizeWidget {

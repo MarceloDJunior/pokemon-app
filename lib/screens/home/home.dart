@@ -3,9 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon_app/bloc/pokemon/pokemon_bloc.dart';
 import 'package:pokemon_app/bloc/theme/theme_cubit.dart';
-import 'package:pokemon_app/components/no_results.dart';
-import 'package:provider/provider.dart';
-import 'package:pokemon_app/components/app_search_bar.dart';
+import 'package:pokemon_app/widgets/no_results.dart';
+import 'package:pokemon_app/widgets/app_search_bar.dart';
 import 'package:pokemon_app/screens/home/pokemon_list.dart';
 
 class Home extends StatefulWidget {

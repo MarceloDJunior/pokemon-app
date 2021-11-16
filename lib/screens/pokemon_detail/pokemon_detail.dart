@@ -4,10 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:pokemon_app/bloc/pokemon/pokemon_bloc.dart';
 import 'package:pokemon_app/bloc/theme/theme_cubit.dart';
-import 'package:pokemon_app/components/pokemon_type.dart';
+import 'package:pokemon_app/widgets/pokemon_type.dart';
 import 'package:pokemon_app/model/pokemon.dart';
 import 'package:pokemon_app/utils/constants.dart';
-import 'package:provider/provider.dart';
 
 class PokemonDetail extends StatefulWidget {
   const PokemonDetail({Key? key, required this.pokemon}) : super(key: key);
